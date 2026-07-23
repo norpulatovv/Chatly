@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { MessageCircle, Sun, Moon, Loader2 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -19,7 +19,7 @@ export default function Register() {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { username, password });
+      const res = await api.post('/auth/register', { username, password });
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('username', res.data.username);
       navigate('/chat');
