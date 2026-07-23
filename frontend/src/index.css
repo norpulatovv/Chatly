@@ -1,0 +1,206 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* ============ SCROLLBAR ============ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128,128,128,0.35) transparent;
+}
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: rgba(128,128,128,0.35);
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.55); }
+
+/* ============ TRANSITIONS ============ */
+body, .theme-fade { transition: background-color 0.35s ease, color 0.35s ease; }
+
+/* ============ KEYFRAMES ============ */
+@keyframes fadeInUpMsgRight {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeInUpMsgLeft {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.85); }
+  70% { transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRightPanel {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes bounceDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+  70% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+@keyframes floatBlob1 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.15); }
+}
+@keyframes floatBlob2 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-30px, 40px) scale(1.1); }
+}
+@keyframes spin360 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes sendPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.8) rotate(-15deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-16px) translateX(-50%); }
+  to { opacity: 1; transform: translateY(0) translateX(-50%); }
+}
+@keyframes checkPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ============ UTILITY CLASSES ============ */
+.msg-in-right { animation: fadeInUpMsgRight 0.28s cubic-bezier(0.2,0.8,0.2,1) both; }
+.msg-in-left { animation: fadeInUpMsgLeft 0.28s cubic-bezier(0.2,0.8,0.2,1) both; }
+.pop-in { animation: popIn 0.22s cubic-bezier(0.2,0.9,0.3,1.3) both; }
+.slide-down { animation: slideDown 0.22s ease both; }
+.slide-up { animation: slideUp 0.22s ease both; }
+.slide-in-left { animation: slideInLeft 0.25s ease both; }
+.slide-in-panel { animation: slideInRightPanel 0.25s ease both; }
+.modal-overlay-anim { animation: overlayFadeIn 0.2s ease both; }
+.modal-card-anim { animation: modalScaleIn 0.25s cubic-bezier(0.2,0.9,0.3,1.1) both; }
+.pulse-online { animation: pulseRing 1.8s infinite; }
+.shake-anim { animation: shakeError 0.4s ease; }
+.spin-anim { animation: spin360 0.8s linear infinite; }
+.send-pop { animation: sendPop 0.32s ease; }
+.check-pop { animation: checkPop 0.25s cubic-bezier(0.3,1.2,0.4,1) both; }
+
+.hover-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-1px);
+}
+.icon-btn {
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  border-radius: 8px;
+}
+.icon-btn:hover {
+  background: rgba(128,128,128,0.15);
+  transform: scale(1.08);
+}
+.icon-btn:active { transform: scale(0.92); }
+
+.msg-bubble {
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.msg-bubble:hover {
+  transform: translateY(-1px);
+}
+
+.convo-row {
+  transition: background-color 0.18s ease, transform 0.15s ease;
+}
+.convo-row:active { transform: scale(0.985); }
+
+.btn-primary {
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(99,102,241,0.35); }
+.btn-primary:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+
+.input-focus {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+.input-focus:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+.typing-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: bounceDot 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.scale-tap { transition: transform 0.12s ease; }
+.scale-tap:active { transform: scale(0.94); }
+
+.image-zoom { transition: transform 0.25s ease; cursor: zoom-in; }
+.image-zoom:hover { transform: scale(1.02); }
+
+.lightbox-overlay { animation: overlayFadeIn 0.2s ease both; }
+.lightbox-img { animation: popIn 0.25s cubic-bezier(0.2,0.9,0.3,1.15) both; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 820px) {
+  .sidebar-panel { width: 100% !important; }
+  .chat-panel { width: 100% !important; }
+}
