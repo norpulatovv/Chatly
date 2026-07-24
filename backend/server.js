@@ -17,7 +17,7 @@ const conversationRoutes = require('./routes/conversations');
 const { extractFirstUrl, fetchLinkPreview } = require('./utils/linkPreview');
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: 'https://chatly-7eb43mgvq-yoldoshevxasan98-7385s-projects.vercel.app' }));
 app.use(express.json());
 
 const uploadDir = path.join(__dirname, 'uploads');
@@ -44,7 +44,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/conversations', conversationRoutes);
 
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: '*' } });
+const io = new Server(server, { cors: { origin: 'https://chatly-7eb43mgvq-yoldoshevxasan98-7385s-projects.vercel.app' } });
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB ulandi'))
