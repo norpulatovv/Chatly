@@ -17,7 +17,7 @@ const conversationRoutes = require('./routes/conversations');
 const { extractFirstUrl, fetchLinkPreview } = require('./utils/linkPreview');
 
 const app = express();
-app.use(cors({ origin: 'https://chatly-7eb43mgvq-yoldoshevxasan98-7385s-projects.vercel.app' }));
+app.use(cors({ origin: 'https://chatly-seven-snowy.vercel.app' }));
 app.use(express.json());
 
 const uploadDir = path.join(__dirname, 'uploads');
@@ -33,7 +33,7 @@ const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
 app.post('/api/upload', upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'Fayl topilmadi' });
   res.json({
-    url: `http://localhost:5000/uploads/${req.file.filename}`,
+    url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
     fileName: req.file.originalname,
     fileType: req.file.mimetype.startsWith('image/') ? 'image' : 'file'
   });
@@ -44,7 +44,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/conversations', conversationRoutes);
 
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: 'https://chatly-7eb43mgvq-yoldoshevxasan98-7385s-projects.vercel.app' } });
+const io = new Server(server, { cors: { origin: 'https://chatly-seven-snowy.vercel.app' } });
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB ulandi'))
